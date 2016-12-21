@@ -24,11 +24,15 @@ int main()
     return 0;
 }
 
-
+// 没有辅助数组的倒置
 void inv(int *x, int n)
 {
     int *p, *i, *j;
     int temp;
+
+    // 无论是奇数还是偶数，总是小于该数的一半
+    // 因为奇数个元素，中间的元素不用替换
+    // 偶数个元素，中间两个元素需要互换
     int m = (n-1)/2;
     i = x; j = x + n - 1; p = x + m;
     for (; i <= p; i++, j--)
