@@ -11,9 +11,13 @@
 #define NUM_SUITS 4		// 4 种花色
 #define NUM_CARDS 5		// 玩家手中有 5 张牌
 
-int num_in_rank[NUM_RANKS];		// 纪录某个数字的
+// 记录玩家手中有多少张某个数字的牌
+int num_in_rank[NUM_RANKS];		
+// 记录玩家手中有多少相同的花色
 int num_in_suit[NUM_SUITS];
+// 是否有顺子，同花色，数字相同的四张、三张
 bool straight, flush, four, three;
+
 int pairs;	/* can be 0, 1, or 2 */
 
 void read_cards(void);
