@@ -19,7 +19,7 @@ char *vlStrCat(char *s1, const char *s2)
     {p++;}
 
     // use the side effect of =
-    while(*p++ = *s2++)
+    while((*p++ = *s2++) != 0)
     {;}
 
     return s1;
