@@ -9,7 +9,7 @@
 struct part{
     int number;
     char name[NAME_LEN+1];
-    int on_hand;
+    int onHand;
     struct part *next;
 };
 
@@ -102,5 +102,100 @@ void insert(void)
         previous = current, current = current->next)
     { ;}
 
-    if (current != NULL && )
+    if (current != NULL && newNode->number == current->number)
+    {
+        printf("Part already exists.\n");
+        free(newNode);
+        return;
+    }
+
+    printf("Enter part name: ");
+    vl_read_line(newNode->name, NAME_LEN);
+    printf("Enter quantity on hand: ");
+    scanf("%d", &newNode->onHand);
+
+    newNode->next = current;
+    if (previous == NULL)
+    {
+        inventory = newNode;
+    }
+    else 
+    {
+        previous->next = newNode;
+    }
+}
+
+/**************************************************
+ * search:
+ * Prompts the user to enter a part number, then
+ * looks up the part in the database. If the part 
+ * exist, prints the name and quantity on hand;
+ * if not, prints an error message. 
+ **************************************************/
+void search(void)
+{
+    int number;
+    struct part *p;
+
+    printf("Enter part number: ");
+    scanf("%d", &number);
+    p = findPart(number);
+
+    if (p != NULL)
+    {
+        printf("Part name: %s\n", p->name);
+        printf("Quantity on hand: %d\n", p->onHand);
+    }
+    else
+    {
+        printf("Part not found.\n");
+    }
+}
+
+/**************************************************
+ * update:
+ * Prompts the user to enter a part number. 
+ * Prints an error message if the part doesn't 
+ * exist; otherwise, prompts the user to enter
+ * change in quantity on hand and updates the 
+ * database. 
+ **************************************************/
+void update(void)
+{
+    int number, change;
+    struct part *p;
+
+    printf("Enter part number: ");
+    scanf("%d", &number);
+    p = findPart(number);
+    if (p != NULL)
+    {
+        printf("Enter change in quantity on hand: ");
+        scanf("%d", &change);
+        p->onHand += change;
+    }
+    else 
+    {
+        printf("Part not found.\n");
+    }
+}
+
+/**************************************************
+ * print: 
+ * Prints a listing of all parts in the database, 
+ * showing the part number, part name, and quantity
+ * on hand. Part numbers will appear in ascending 
+ * order. 
+ **************************************************/
+void print(void)
+{
+    struct part *p;
+
+    printf("Part Number     Part name                "
+           "Quatity on Hand\n");
+    for (p = inventory; p != NULL; p = p->next)
+    {
+        printf("%7d         %-25s%11d\n", p->number,
+            p->name, p->onHand);
+    }
 }
